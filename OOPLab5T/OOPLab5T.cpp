@@ -88,7 +88,7 @@ public:
 
 class WINDOWwithmenuBUTTON :public WINDOW {
     string MENUATRIBUTE;
-   
+
 public:
 
     WINDOWwithmenuBUTTON() {
@@ -104,8 +104,8 @@ public:
     }
     void printing() {
 
-       
- 
+
+
         cout << MENUATRIBUTE << endl;
 
     }
@@ -116,24 +116,83 @@ public:
 };
 
 
+enum BODYSTATE
+{
+    STRONG,
+    slim,
+    athletic,
+    fat,
+    huge
 
+};
 
 class HUMAN {
     string NAME;
     int age;
     int height;
-    enum BODYSTATE
-    {STRONG,
-        slim,
-        athletic,
-        fat,
-        huge
-
-    };
+    BODYSTATE H;
     int salary;
 
 public:
+    void setName(string N) {
+        NAME = N;
+    }
+    void setAge(int N) {
+        age = N;
+    }
+    void setHaight(int N) {
+        height = N;
+    }
+    void setState(BODYSTATE N) {
+        H = N;
+    }
+    void setSarary(int N) {
+        salary = N;
+    }
 
+
+    string getName() {
+        return NAME;
+    }
+    int getAge() {
+        return age;
+    }
+    int getHeight() {
+        return height;
+    }
+    BODYSTATE getState() {
+        return H;
+    }
+    int getSalary() {
+        return salary;
+    }
+
+
+
+
+    HUMAN() {
+        NAME = "Pol";
+        age = 24;
+        height = 179;
+        H = athletic;
+        salary = 12000;
+    }
+    HUMAN(string N, int a, int h, BODYSTATE F, int s) {
+        NAME = N;
+        age = a;
+        height = h;
+        H = F;
+        salary = s;
+    }
+
+    HUMAN(const HUMAN& OBJ) {
+        this->H = OBJ.H;
+        this->NAME = OBJ.NAME;
+        this->age = OBJ.age;
+        this->height = OBJ.height;
+        this->salary = OBJ.salary;
+
+    }
 
 
 
@@ -141,8 +200,43 @@ public:
 };
 
 class STUDENT :public HUMAN {
-
+    string University;
+    string Speciality;
+    int AverMark;
 public:
+
+
+
+    STUDENT() {
+        University = "CHNU";
+        Speciality = "Computer science";
+        AverMark = 83;
+    }
+
+    STUDENT(string U, string S, int A, string N, int a, int h, BODYSTATE B, int s) {
+        University = U;
+        Speciality = S;
+        AverMark = A;
+        setName(N);
+        setAge(a);
+        setHaight(h);
+        setState(B);
+        setSarary(s);
+    }
+
+    STUDENT(const STUDENT& obj) {
+        this->AverMark = obj.AverMark;
+        this->Speciality = obj.Speciality;
+        this->University = obj.University;
+
+
+        this->HUMAN::HUMAN(obj);
+    }
+
+    void printALL() {
+
+        cout << University << " " << getSalary() << " " << getAge() << " " << getHeight() << " " << getState() << " " << getName() << endl;
+    }
 
 };
 
@@ -155,22 +249,25 @@ public:
         return F[index];
 
     }
+    void setF(int index, int value) {
+        F[index] = value;
+    }
     vector3D() {
 
         F.emplace_back(0);
         F.emplace_back(0);
         F.emplace_back(0);
     }
-    
-    vector3D(double a, double b, double c){
+
+    vector3D(double a, double b, double c) {
 
         F.emplace_back(a);
         F.emplace_back(b);
         F.emplace_back(c);
     }
 
-    vector3D operator + (vector3D A){
-        vector3D C(this->F[0] + A.getF(0),this->F[1]+ A.getF(1),this->F[2]+ A.getF(2));
+    vector3D operator + (vector3D A) {
+        vector3D C(this->F[0] + A.getF(0), this->F[1] + A.getF(1), this->F[2] + A.getF(2));
 
         return C;
     }
@@ -184,24 +281,42 @@ public:
 
 
 class Triad {
-    double x=0, y=0, z=0;
+    double x = 0, y = 0, z = 0;
+    vector3D Object1;
 public:
+
+    double getObject1(int ind) {
+        return Object1.getF(ind);
+    }
+
+    Triad(double a, double b, double c) :Object1(a, b, c) {
+        x = a;
+        y = b;
+        z = c;
+
+    }
     void multiplication(double scail) {
         x *= scail;
+        Object1.setF(0, x);
         y *= scail;
+        Object1.setF(1, y);
         z *= scail;
+        Object1.setF(2, z);
     }
 
     void addiction(double scail1) {
         x += scail1;
+        Object1.setF(0, x);
         y += scail1;
+        Object1.setF(1, y);
         z += scail1;
+        Object1.setF(2, z);
     }
     bool compair(double scail2) {
         if (x == scail2 || y == scail2 || z == scail2) return 1;
-        else  return 0 ;
+        else  return 0;
     }
-//    vector3D A(x,y,z);
+
 
 };
 
@@ -225,21 +340,31 @@ int mainTask2() {
     REESTRATION.showBUTTON();
     MENUPAGE.printing();
     binto.printing();
- 
-   
+
+
     return 1;
 
 }
 int mainTask3() {
 
-    LORRY DAF;
+    HUMAN A1("Oleg", 26, 190, STRONG, 18000), A2(A1),A3;
+    STUDENT B1("CHNO", "CS", 78, "Kiria", 23, 164, slim, 0), B2(B1), B3;
+
+
+    B1.printALL();
+    B2.printALL();
+    B3.printALL();
     return 1;
 
 }int mainTask4() {
 
-    vector3D D, K(3,4,1), N(7,2,9);
+    vector3D D, K(3, 4, 1), N(7, 2, 9);
     D = K + N;
     cout << D.getF(1) << endl;
+    Triad ExperementObl(1, 7, 4);
+    ExperementObl.multiplication(4);
+    ExperementObl.addiction(28);
+    cout << ExperementObl.getObject1(2) << endl;
     return 1;
 
 }
@@ -252,12 +377,16 @@ int mainTask5() {
 int main()
 {
     std::cout << " Lab #5  !\n";
+    again:
+    cout << "choose task: "<<endl;
     //  Код виконання завдань
     //  Головне меню завдань
     //  Функції та класи можуть знаходитись в інших файлах проекту
 
     int chain;
     cin >> chain;
+    
+    cout << endl << endl;
     /*
      if (chain == 1) chain = mainExample1();
      if (chain == 2) chain = mainExample2();
@@ -273,6 +402,6 @@ int main()
     if (chain == 2) chain = mainTask2();
     if (chain == 3) chain = mainTask3();
     if (chain == 4) chain = mainTask4();
-    if (chain == 5) chain = mainTask5();
-
+    //if (chain == 5) chain = mainTask5();
+    if (chain < 5)goto again;
 }
