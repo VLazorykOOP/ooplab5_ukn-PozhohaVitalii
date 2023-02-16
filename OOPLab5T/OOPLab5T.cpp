@@ -9,6 +9,7 @@ using namespace std;
 //
 #include "Lab5Exmaple.h"
 
+
 class CAR {
     int power, piston;
 protected:
@@ -26,6 +27,7 @@ public:
     int getPISTON() { return piston; }
     ~CAR() { cout << "DEstract CAR" << endl; }
 };
+
 class LORRY :protected CAR {
 private:
     double weight;
@@ -46,6 +48,9 @@ public:
 
 
 
+
+
+// second Task
 
 class BUTTON {
     int height, weidth;
@@ -116,6 +121,8 @@ public:
 };
 
 
+// third task
+
 enum BODYSTATE
 {
     STRONG,
@@ -150,7 +157,6 @@ public:
         salary = N;
     }
 
-
     string getName() {
         return NAME;
     }
@@ -167,9 +173,6 @@ public:
         return salary;
     }
 
-
-
-
     HUMAN() {
         NAME = "Pol";
         age = 24;
@@ -184,7 +187,6 @@ public:
         H = F;
         salary = s;
     }
-
     HUMAN(const HUMAN& OBJ) {
         this->H = OBJ.H;
         this->NAME = OBJ.NAME;
@@ -193,9 +195,6 @@ public:
         this->salary = OBJ.salary;
 
     }
-
-
-
 
 };
 
@@ -212,7 +211,6 @@ public:
         Speciality = "Computer science";
         AverMark = 83;
     }
-
     STUDENT(string U, string S, int A, string N, int a, int h, BODYSTATE B, int s) {
         University = U;
         Speciality = S;
@@ -223,7 +221,6 @@ public:
         setState(B);
         setSarary(s);
     }
-
     STUDENT(const STUDENT& obj) {
         this->AverMark = obj.AverMark;
         this->Speciality = obj.Speciality;
@@ -241,6 +238,8 @@ public:
 };
 
 
+
+//fourth task
 
 class vector3D {
     vector<double> F;
@@ -278,7 +277,6 @@ public:
     }
 
 };
-
 
 class Triad {
     double x = 0, y = 0, z = 0;
@@ -321,6 +319,8 @@ public:
 };
 
 
+
+//function managment 
 
 int mainTask1() {
     string name;
@@ -368,25 +368,24 @@ int mainTask3() {
     return 1;
 
 }
-int mainTask5() {
 
-    LORRY DAF;
-    return 1;
 
-}
+
+
+
+// Main Func
 int main()
 {
     std::cout << " Lab #5  !\n";
     again:
     cout << "choose task: "<<endl;
-    //  Код виконання завдань
-    //  Головне меню завдань
-    //  Функції та класи можуть знаходитись в інших файлах проекту
+   
 
     int chain;
     cin >> chain;
     
     cout << endl << endl;
+
     /*
      if (chain == 1) chain = mainExample1();
      if (chain == 2) chain = mainExample2();
@@ -402,6 +401,5 @@ int main()
     if (chain == 2) chain = mainTask2();
     if (chain == 3) chain = mainTask3();
     if (chain == 4) chain = mainTask4();
-    //if (chain == 5) chain = mainTask5();
     if (chain < 5)goto again;
 }
